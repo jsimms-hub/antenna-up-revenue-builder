@@ -24,6 +24,8 @@ h1{margin-bottom:10px}
 .pr.h{font-weight:bold;border-bottom:2px solid #000;margin-bottom:8px}
 .pr.sh{font-weight:bold;margin-top:12px;text-transform:uppercase}
 .pr.i{padding-left:12px}
+.pr.i > div:not(:first-child){display:flex;justify-content:center}
+.pr.i .pa{width:75px;text-align:center}
 .pr.t{font-weight:bold;border-top:1px solid #ccc;padding-top:8px;margin-top:8px}
 .pr.t > div:not(:first-child){display:flex;justify-content:center}
 .pr.t .pa{width:75px;text-align:center}
@@ -873,7 +875,7 @@ function updateCalculations() {
   allNames.forEach(name => {
     html += '<div class="pr i"><div>' + name + '</div>';
     years.forEach(yr => {
-      html += '<div class="pa">$' + (revByYear[yr][name] || 0).toLocaleString() + '</div>';
+      html += '<div><div class="pa">$' + (revByYear[yr][name] || 0).toLocaleString() + '</div></div>';
     });
     html += '</div>';
   });
