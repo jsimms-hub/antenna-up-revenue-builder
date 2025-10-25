@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Antenna Up Revenue Builder</title><style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font:12px Arial;padding:20px;background:#f5f5f5}
+.container{max-width:1600px;margin:0 auto}
+h1{margin-bottom:10px}
+.layout{display:grid;grid-template-columns:1fr 800px;gap:20px}
+.streams,.pl{background:#fff;padding:20px;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,0.1)}
+.pl{position:sticky;top:20px;max-height:calc(100vh - 40px);overflow-y:auto}
+.cat{margin-bottom:20px;padding-bottom:15px;border-bottom:1px solid #e5e7eb}
+.ch{font-size:10px;font-weight:600;color:#666;text-transform:uppercase;margin-bottom:12px}
+.stream-block{margin-bottom:15px;padding:12px;background:#f9f9f9;border-radius:4px;min-height:120px}
+.stream-block.active{background:#dbeafe;border-left:3px solid #3b82f6}
+.stream-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.stream-header input[type=checkbox]{width:18px;height:18px}
+.stream-header .name{font-size:11px;font-weight:600}
+.data-row{display:grid;grid-template-columns:100px 1fr 1fr 1fr 1fr;gap:8px;padding:4px 0;align-items:center}
+.data-row .label{font-size:10px;color:#666;font-weight:500}
+.data-row input[type=number]{width:100%;padding:4px;border:1px solid #ccc;border-radius:4px;text-align:right;font-size:10px}
+.data-row.total{font-weight:600;border-top:1px solid #ccc;margin-top:4px;padding-top:8px}
+.data-row.total .value{text-align:right;font-size:10px;color:#059669}
+.col-header{text-align:center;font-size:9px;font-weight:600;color:#666}
+.pr{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:8px;padding:4px 0;font-size:10px;align-items:center}
+.pr.h{font-weight:bold;border-bottom:2px solid #000;margin-bottom:8px}
+.pr.sh{font-weight:bold;margin-top:12px;text-transform:uppercase}
+.pr.i{padding-left:12px}
+.pr.t{font-weight:bold;border-top:1px solid #ccc;padding-top:8px;margin-top:8px}
+.pr.gt{font-weight:bold;border-top:3px double #000;padding-top:10px;margin-top:10px}
+.pa{text-align:right;font-family:monospace}
+.pos{color:#059669}
+.neg{color:#dc2626}
+.ei{width:75px;padding:3px;border:1px solid #ccc;border-radius:3px;font-size:10px;text-align:right}
+</style></head><body>
+<div class="container">
+<h1>Antenna Up Revenue Builder</h1>
+<p style="color:#666;margin-bottom:20px;font-size:13px">Select revenue streams and adjust assumptions. All expenses editable.</p>
+
+<div class="layout">
+<div class="streams">
+<h3 style="margin-bottom:12px;font-size:14px">Revenue Streams</h3>
+
+<!-- Foundation & Grants -->
+<div class="cat">
+<div class="ch">Foundation & Grants</div>
+
+<div class="stream-block" id="sb1">
+<div class="stream-header">
+<input type="checkbox" id="c1">
+<span class="name">Foundation Grants</span>
+</div>
+<div class="data-row">
+<div class="label">Count</div>
+<div><input type="number" id="v1-25" value="3"></div>
+<div><input type="number" id="v1-26" value="3"></div>
+<div><input type="number" id="v1-27" value="4"></div>
+<div><input type="number" id="v1-28" value="5"></div>
+</div>
+<div class="data-row">
+<div class="label">$ per grant</div>
+<div><input type="number" id="a1-25" value="150000"></div>
+<div><input type="number" id="a1-26" value="150000"></div>
+<div><input type="number" id="a1-27" value="150000"></div>
+<div><input type="number" id="a1-28" value="150000"></div>
+</div>
+<div class="data-row total">
+<div class="label">Total</div>
+<div class="value" id="t1-25">$0</div>
+<div class="value" id="t1-26">$0</div>
+<div class="value" id="t1-27">$0</div>
+<div class="value" id="t1-28">$0</div>
+</div>
+</div>
+
+<div class="stream-block" id="sb2">
+<div class="stream-header">
+<input type="checkbox" id="c2">
+<span class="name">Government Grants</span>
+</div>
+<div class="data-row">
+<div class="label">Count</div>
+<div><input type="number" id="v2-25" value="1"></div>
+<div><input type="number" id="v2-26" value="1"></div>
+<div><input type="number" id="v2-27" value="2"></div>
+<div><input type="number" id="v2-28" value="2"></div>
+</div>
+<div class="data-row">
+<div class="label">$ per grant</div>
+<div><input type="number" id="a2-25" value="100000"></div>
+<div><input type="number" id="a2-26" value="100000"></div>
+<div><input type="number" id="a2-27" value="100000"></div>
+<div><input type="number" id="a2-28" value="100000"></div>
+</div>
+<div class="data-row total">
+<div class="label">Total</div>
+<div class="value" id="t2-25">$0</div>
+<div class="value" id="t2-26">$0</div>
+<div class="value" id="t2-27">$0</div>
+<div class="value" id="t2-28">$0</div>
+</div>
+</div>
+</div>
+
+<!-- Individual Giving -->
+<div class="cat">
+<div class="ch">Individual Giving</div>
+
+<div class="stream-block" id="sb3">
+<div class="stream-header">
+<input type="checkbox" id="c3">
+<span class="name">Individual Donors</span>
+</div>
+<div class="data-row">
+<div class="label">Count</div>
+<div><input type="number" id="v3-25" value="100"></div>
+<div><input type="number" id="v3-26" value="150"></div>
+<div><input type="number" id="v3-27" value="200"></div>
+<div><input type="number" id="v3-28" value="250"></div>
+</div>
+<div class="data-row">
+<div class="label">$ per donor</div>
+<div><input type="number" id="a3-25" value="1500"></div>
+<div><input type="number" id="a3-26" value="1500"></div>
+<div><input type="number" id="a3-27" value="1500"></div>
+<div><input type="number" id="a3-28" value="1500"></div>
+</div>
+<div class="data-row total">
+<div class="label">Total</div>
+<div class="value" id="t3-25">$0</div>
+<div class="value" id="t3-26">$0</div>
+<div class="value" id="t3-27">$0</div>
+<div class="value" id="t3-28">$0</div>
+</div>
+</div>
+
+<div class="stream-block" id="sb4">
+<div class="stream-header">
+<input type="checkbox" id="c4">
+<span class="name">Major Gifts</span>
+</div>
+<div class="data-row">
+<div class="label">Count</div>
+<div><input type="number" id="v4-25" value="5"></div>
+<div><input type="number" id="v4-26" value="8"></div>
+<div><input type="number" id="v4-27" value="10"></div>
+<div><input type="number" id="v4-28" value="12"></div>
+</div>
+<div class="data-row">
+<div class="label">$ per gift</div>
+<div><input type="number" id="a4-25" value="15000"></div>
+<div><input type="number" id="a4-26" value="15000"></div>
+<div><input type="number" id="a4-27" value="15000"></div>
+<div><input type="number" id="a4-28" value="15000"></div>
+</div>
+<div class="data-row total">
+<div class="label">Total</div>
+<div class="value" id="t4-25">$0</div>
+<div class="value" id="t4-26">$0</div>
+<div class="value" id="t4-27">$0</div>
+<div class="value" id="t4-28">$0</div>
+</div>
+</div>
+</div>
+
+<!-- Corporate -->
+<div class="cat">
+<div class="ch">Corporate</div>
+
+<div class="stream-block" id="sb5">
+<div class="stream-header">
+<input type="checkbox" id="c5">
+<span class="name">Corporate Sponsors</span>
+</div>
+<div class="data-row">
+<div class="label">Count</div>
+<div><input type="number" id="v5-25" value="5"></div>
+<div><input type="number" id="v5-26" value="8"></div>
+<div><input type="number" id="v5-27" value="10"></div>
+<div><input type="number" id="v5-28" value="12"></div>
+</div>
+<div class="data-row">
+<div class="label">$ per sponsor</div>
+<div><input type="number" id="a5-25" value="25000"></div>
+<div><input type="number" id="a5-26" value="25000"></div>
+<div><input type="number" id="a5-27" value="25000"></div>
+<div><input type="number" id="a5-28" value="25000"></div>
+</div>
+<div class="data-row total">
+<div class="label">Total</div>
+<div class="value" id="t5-25">$0</div>
+<div class="value" id="t5-26">$0</div>
+<div class="value" id="t5-27">$0</div>
+<div class="value" id="t5-28">$0</div>
+</div>
+</div>
+
+<div class="stream-block" id="sb6">
+<div class="stream-header">
+<input type="checkbox" id="c6">
+<span class="name">Retainer Clients</span>
+</div>
+<div class="data-row">
+<div class="label">Count</div>
+<div><input type="number" id="v6-25" value="5"></div>
+<div><input type="number" id="v6-26" value="8"></div>
+<div><input type="number" id="v6-27" value="10"></div>
+<div><input type="number" id="v6-28" value="12"></div>
+</div>
+<div class="data-row">
+<div class="label">$/month</div>
+<div><input type="number" id="a6-25" value="8000"></div>
+<div><input type="number" id="a6-26" value="8000"></div>
+<div><input type="number" id="a6-27" value="8000"></div>
+<div><input type="number" id="a6-28" value="8000"></div>
+</div>
+<div class="data-row total">
+<div class="label">Total (×12)</div>
+<div class="value" id="t6-25">$0</div>
+<div class="value" id="t6-26">$0</div>
+<div class="value" id="t6-27">$0</div>
+<div class="value" id="t6-28">$0</div>
+</div>
+</div>
+
+<div class="stream-block" id="sb7">
+<div class="stream-header">
+<input type="checkbox" id="c7">
+<span class="name">Consulting Projects</span>
+</div>
+<div class="data-row">
+<div class="label">Count</div>
+<div><input type="number" id="v7-25" value="10"></div>
+<div><input type="number" id="v7-26" value="15"></div>
+<div><input type="number" id="v7-27" value="20"></div>
+<div><input type="number" id="v7-28" value="25"></div>
+</div>
+<div class="data-row">
+<div class="label">$ per project</div>
+<div><input type="number" id="a7-25" value="25000"></div>
+<div><input type="number" id="a7-26" value="25000"></div>
+<div><input type="number" id="a7-27" value="25000"></div>
+<div><input type="number" id="a7-28" value="25000"></div>
+</div>
+<div class="data-row total">
+<div class="label">Total</div>
+<div class="value" id="t7-25">$0</div>
+<div class="value" id="t7-26">$0</div>
+<div class="value" id="t7-27">$0</div>
+<div class="value" id="t7-28">$0</div>
+</div>
+</div>
+</div>
+
+<!-- Training -->
+<div class="cat">
+<div class="ch">Training</div>
+
+<div class="stream-block" id="sb8">
+<div class="stream-header">
+<input type="checkbox" id="c8">
+<span class="name">Workshops</span>
+</div>
+<div class="data-row">
+<div class="label">Count</div>
+<div><input type="number" id="v8-25" value="12"></div>
+<div><input type="number" id="v8-26" value="18"></div>
+<div><input type="number" id="v8-27" value="24"></div>
+<div><input type="number" id="v8-28" value="30"></div>
+</div>
+<div class="data-row">
+<div class="label">$ per workshop</div>
+<div><input type="number" id="a8-25" value="5000"></div>
+<div><input type="number" id="a8-26" value="5000"></div>
+<div><input type="number" id="a8-27" value="5000"></div>
+<div><input type="number" id="a8-28" value="5000"></div>
+</div>
+<div class="data-row total">
+<div class="label">Total</div>
+<div class="value" id="t8-25">$0</div>
+<div class="value" id="t8-26">$0</div>
+<div class="value" id="t8-27">$0</div>
+<div class="value" id="t8-28">$0</div>
+</div>
+</div>
+
+<div class="stream-block" id="sb9">
+<div class="stream-header">
+<input type="checkbox" id="c9">
+<span class="name">Speaking Fees</span>
+</div>
+<div class="data-row">
+<div class="label">Count</div>
+<div><input type="number" id="v9-25" value="10"></div>
+<div><input type="number" id="v9-26" value="15"></div>
+<div><input type="number" id="v9-27" value="20"></div>
+<div><input type="number" id="v9-28" value="25"></div>
+</div>
+<div class="data-row">
+<div class="label">$ per speech</div>
+<div><input type="number" id="a9-25" value="7500"></div>
+<div><input type="number" id="a9-26" value="7500"></div>
+<div><input type="number" id="a9-27" value="7500"></div>
+<div><input type="number" id="a9-28" value="7500"></div>
+</div>
+<div class="data-row total">
+<div class="label">Total</div>
+<div class="value" id="t9-25">$0</div>
+<div class="value" id="t9-26">$0</div>
+<div class="value" id="t9-27">$0</div>
+<div class="value" id="t9-28">$0</div>
+</div>
+</div>
+</div>
+
+<!-- Subscriptions -->
+<div class="cat">
+<div class="ch">Subscriptions</div>
+
+<div class="stream-block" id="sb10">
+<div class="stream-header">
+<input type="checkbox" id="c10">
+<span class="name">Premium Subscriptions</span>
+</div>
+<div class="data-row">
+<div class="label">Count</div>
+<div><input type="number" id="v10-25" value="300"></div>
+<div><input type="number" id="v10-26" value="500"></div>
+<div><input type="number" id="v10-27" value="750"></div>
+<div><input type="number" id="v10-28" value="1000"></div>
+</div>
+<div class="data-row">
+<div class="label">$/month</div>
+<div><input type="number" id="a10-25" value="49"></div>
+<div><input type="number" id="a10-26" value="49"></div>
+<div><input type="number" id="a10-27" value="49"></div>
+<div><input type="number" id="a10-28" value="49"></div>
+</div>
+<div class="data-row total">
+<div class="label">Total (×12)</div>
+<div class="value" id="t10-25">$0</div>
+<div class="value" id="t10-26">$0</div>
+<div class="value" id="t10-27">$0</div>
+<div class="value" id="t10-28">$0</div>
+</div>
+</div>
+
+<div class="stream-block" id="sb11">
+<div class="stream-header">
+<input type="checkbox" id="c11">
+<span class="name">Annual Memberships</span>
+</div>
+<div class="data-row">
+<div class="label">Count</div>
+<div><input type="number" id="v11-25" value="150"></div>
+<div><input type="number" id="v11-26" value="250"></div>
+<div><input type="number" id="v11-27" value="350"></div>
+<div><input type="number" id="v11-28" value="500"></div>
+</div>
+<div class="data-row">
+<div class="label">$ per year</div>
+<div><input type="number" id="a11-25" value="500"></div>
+<div><input type="number" id="a11-26" value="500"></div>
+<div><input type="number" id="a11-27" value="500"></div>
+<div><input type="number" id="a11-28" value="500"></div>
+</div>
+<div class="data-row total">
+<div class="label">Total</div>
+<div class="value" id="t11-25">$0</div>
+<div class="value" id="t11-26">$0</div>
+<div class="value" id="t11-27">$0</div>
+<div class="value" id="t11-28">$0</div>
+</div>
+</div>
+</div>
+
+<!-- Raising the Ball -->
+<div class="cat">
+<div class="ch">Raising the Ball</div>
+
+<div class="stream-block" id="sb12">
+<div class="stream-header">
+<input type="checkbox" id="c12">
+<span class="name">Individual Founding</span>
+</div>
+<div class="data-row">
+<div class="label">Count</div>
+<div><input type="number" id="v12-25" value="25"></div>
+<div><input type="number" id="v12-26" value="25"></div>
+<div><input type="number" id="v12-27" value="0"></div>
+<div><input type="number" id="v12-28" value="0"></div>
+</div>
+<div class="data-row">
+<div class="label">$ per member</div>
+<div><input type="number" id="a12-25" value="25000" readonly style="background:#eee"></div>
+<div><input type="number" id="a12-26" value="25000" readonly style="background:#eee"></div>
+<div><input type="number" id="a12-27" value="25000" readonly style="background:#eee"></div>
+<div><input type="number" id="a12-28" value="25000" readonly style="background:#eee"></div>
+</div>
+<div class="data-row total">
+<div class="label">Total</div>
+<div class="value" id="t12-25">$0</div>
+<div class="value" id="t12-26">$0</div>
+<div class="value" id="t12-27">$0</div>
+<div class="value" id="t12-28">$0</div>
+</div>
+</div>
+
+<div class="stream-block" id="sb13">
+<div class="stream-header">
+<input type="checkbox" id="c13">
+<span class="name">Institutional Founding</span>
+</div>
+<div class="data-row">
+<div class="label">Count</div>
+<div><input type="number" id="v13-25" value="25"></div>
+<div><input type="number" id="v13-26" value="25"></div>
+<div><input type="number" id="v13-27" value="0"></div>
+<div><input type="number" id="v13-28" value="0"></div>
+</div>
+<div class="data-row">
+<div class="label">$ per member</div>
+<div><input type="number" id="a13-25" value="50000" readonly style="background:#eee"></div>
+<div><input type="number" id="a13-26" value="50000" readonly style="background:#eee"></div>
+<div><input type="number" id="a13-27" value="50000" readonly style="background:#eee"></div>
+<div><input type="number" id="a13-28" value="50000" readonly style="background:#eee"></div>
+</div>
+<div class="data-row total">
+<div class="label">Total</div>
+<div class="value" id="t13-25">$0</div>
+<div class="value" id="t13-26">$0</div>
+<div class="value" id="t13-27">$0</div>
+<div class="value" id="t13-28">$0</div>
+</div>
+</div>
+
+<div class="stream-block" id="sb14">
+<div class="stream-header">
+<input type="checkbox" id="c14">
+<span class="name">Individual Ongoing</span>
+</div>
+<div class="data-row">
+<div class="label">Count</div>
+<div><input type="number" id="v14-25" value="0"></div>
+<div><input type="number" id="v14-26" value="0"></div>
+<div><input type="number" id="v14-27" value="25"></div>
+<div><input type="number" id="v14-28" value="30"></div>
+</div>
+<div class="data-row">
+<div class="label">$ per member</div>
+<div><input type="number" id="a14-25" value="20000" readonly style="background:#eee"></div>
+<div><input type="number" id="a14-26" value="20000" readonly style="background:#eee"></div>
+<div><input type="number" id="a14-27" value="20000" readonly style="background:#eee"></div>
+<div><input type="number" id="a14-28" value="20000" readonly style="background:#eee"></div>
+</div>
+<div class="data-row total">
+<div class="label">Total</div>
+<div class="value" id="t14-25">$0</div>
+<div class="value" id="t14-26">$0</div>
+<div class="value" id="t14-27">$0</div>
+<div class="value" id="t14-28">$0</div>
+</div>
+</div>
+
+<div class="stream-block" id="sb15">
+<div class="stream-header">
+<input type="checkbox" id="c15">
+<span class="name">Institutional Ongoing</span>
+</div>
+<div class="data-row">
+<div class="label">Count</div>
+<div><input type="number" id="v15-25" value="0"></div>
+<div><input type="number" id="v15-26" value="0"></div>
+<div><input type="number" id="v15-27" value="25"></div>
+<div><input type="number" id="v15-28" value="30"></div>
+</div>
+<div class="data-row">
+<div class="label">$ per member</div>
+<div><input type="number" id="a15-25" value="35000" readonly style="background:#eee"></div>
+<div><input type="number" id="a15-26" value="35000" readonly style="background:#eee"></div>
+<div><input type="number" id="a15-27" value="35000" readonly style="background:#eee"></div>
+<div><input type="number" id="a15-28" value="35000" readonly style="background:#eee"></div>
+</div>
+<div class="data-row total">
+<div class="label">Total</div>
+<div class="value" id="t15-25">$0</div>
+<div class="value" id="t15-26">$0</div>
+<div class="value" id="t15-27">$0</div>
+<div class="value" id="t15-28">$0</div>
+</div>
+</div>
+</div>
+
+<!-- Events & Content -->
+<div class="cat">
+<div class="ch">Events & Content</div>
+
+<div class="stream-block" id="sb16">
+<div class="stream-header">
+<input type="checkbox" id="c16">
+<span class="name">Events/Conferences</span>
+</div>
+<div class="data-row">
+<div class="label">Count</div>
+<div><input type="number" id="v16-25" value="4"></div>
+<div><input type="number" id="v16-26" value="6"></div>
+<div><input type="number" id="v16-27" value="8"></div>
+<div><input type="number" id="v16-28" value="10"></div>
+</div>
+<div class="data-row">
+<div class="label">$ per event</div>
+<div><input type="number" id="a16-25" value="15000"></div>
+<div><input type="number" id="a16-26" value="15000"></div>
+<div><input type="number" id="a16-27" value="15000"></div>
+<div><input type="number" id="a16-28" value="15000"></div>
+</div>
+<div class="data-row total">
+<div class="label">Total</div>
+<div class="value" id="t16-25">$0</div>
+<div class="value" id="t16-26">$0</div>
+<div class="value" id="t16-27">$0</div>
+<div class="value" id="t16-28">$0</div>
+</div>
+</div>
+
+<div class="stream-block" id="sb17">
+<div class="stream-header">
+<input type="checkbox" id="c17">
+<span class="name">Content Sponsors</span>
+</div>
+<div class="data-row">
+<div class="label">Count</div>
+<div><input type="number" id="v17-25" value="6"></div>
+<div><input type="number" id="v17-26" value="10"></div>
+<div><input type="number" id="v17-27" value="15"></div>
+<div><input type="number" id="v17-28" value="20"></div>
+</div>
+<div class="data-row">
+<div class="label">$ per sponsor</div>
+<div><input type="number" id="a17-25" value="10000"></div>
+<div><input type="number" id="a17-26" value="10000"></div>
+<div><input type="number" id="a17-27" value="10000"></div>
+<div><input type="number" id="a17-28" value="10000"></div>
+</div>
+<div class="data-row total">
+<div class="label">Total</div>
+<div class="value" id="t17-25">$0</div>
+<div class="value" id="t17-26">$0</div>
+<div class="value" id="t17-27">$0</div>
+<div class="value" id="t17-28">$0</div>
+</div>
+</div>
+
+<div class="stream-block" id="sb18">
+<div class="stream-header">
+<input type="checkbox" id="c18">
+<span class="name">Content Licensing</span>
+</div>
+<div class="data-row">
+<div class="label">Count</div>
+<div><input type="number" id="v18-25" value="3"></div>
+<div><input type="number" id="v18-26" value="5"></div>
+<div><input type="number" id="v18-27" value="8"></div>
+<div><input type="number" id="v18-28" value="10"></div>
+</div>
+<div class="data-row">
+<div class="label">$ per deal</div>
+<div><input type="number" id="a18-25" value="30000"></div>
+<div><input type="number" id="a18-26" value="30000"></div>
+<div><input type="number" id="a18-27" value="30000"></div>
+<div><input type="number" id="a18-28" value="30000"></div>
+</div>
+<div class="data-row total">
+<div class="label">Total</div>
+<div class="value" id="t18-25">$0</div>
+<div class="value" id="t18-26">$0</div>
+<div class="value" id="t18-27">$0</div>
+<div class="value" id="t18-28">$0</div>
+</div>
+</div>
+</div>
+
+<!-- Other -->
+<div class="cat">
+<div class="ch">Other</div>
+
+<div class="stream-block" id="sb19">
+<div class="stream-header">
+<input type="checkbox" id="c19">
+<span class="name">Affiliate Revenue</span>
+</div>
+<div class="data-row">
+<div class="label">$/month</div>
+<div><input type="number" id="v19-25" value="3000"></div>
+<div><input type="number" id="v19-26" value="5000"></div>
+<div><input type="number" id="v19-27" value="7000"></div>
+<div><input type="number" id="v19-28" value="10000"></div>
+</div>
+<div class="data-row total">
+<div class="label">Total (×12)</div>
+<div class="value" id="t19-25">$0</div>
+<div class="value" id="t19-26">$0</div>
+<div class="value" id="t19-27">$0</div>
+<div class="value" id="t19-28">$0</div>
+</div>
+</div>
+</div>
+
+</div>
+
+<!-- P&L Panel -->
+<div class="pl">
+<div style="text-align:center;margin-bottom:15px;padding-bottom:10px;border-bottom:2px solid #000">
+<div style="font-size:16px;font-weight:bold">ANTENNA UP</div>
+<div style="font-size:10px;color:#666">P&L Statement - 4 Year</div>
+</div>
+
+<div class="pr h">
+<div></div>
+<div>2025</div>
+<div>2026</div>
+<div>2027</div>
+<div>2028</div>
+</div>
+
+<div class="pr sh">
+<div>REVENUE</div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+</div>
+
+<div id="rl"></div>
+
+<div class="pr t">
+<div>Total Revenue</div>
+<div class="pa" id="tr25">$0</div>
+<div class="pa" id="tr26">$0</div>
+<div class="pa" id="tr27">$0</div>
+<div class="pa" id="tr28">$0</div>
+</div>
+
+<div class="pr sh">
+<div>EXPENSES</div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+</div>
+
+<div class="pr i">
+<div>Payroll</div>
+<div><input type="number" class="ei" id="e1-25" value="450000"></div>
+<div><input type="number" class="ei" id="e1-26" value="500000"></div>
+<div><input type="number" class="ei" id="e1-27" value="550000"></div>
+<div><input type="number" class="ei" id="e1-28" value="600000"></div>
+</div>
+
+<div class="pr i">
+<div>PR</div>
+<div><input type="number" class="ei" id="e2-25" value="100000"></div>
+<div><input type="number" class="ei" id="e2-26" value="100000"></div>
+<div><input type="number" class="ei" id="e2-27" value="100000"></div>
+<div><input type="number" class="ei" id="e2-28" value="100000"></div>
+</div>
+
+<div class="pr i">
+<div>Brand</div>
+<div><input type="number" class="ei" id="e3-25" value="50000"></div>
+<div><input type="number" class="ei" id="e3-26" value="30000"></div>
+<div><input type="number" class="ei" id="e3-27" value="20000"></div>
+<div><input type="number" class="ei" id="e3-28" value="15000"></div>
+</div>
+
+<div class="pr i">
+<div>Fundraising</div>
+<div><input type="number" class="ei" id="e4-25" value="25000"></div>
+<div><input type="number" class="ei" id="e4-26" value="25000"></div>
+<div><input type="number" class="ei" id="e4-27" value="30000"></div>
+<div><input type="number" class="ei" id="e4-28" value="30000"></div>
+</div>
+
+<div class="pr i">
+<div>Publications</div>
+<div><input type="number" class="ei" id="e5-25" value="25000"></div>
+<div><input type="number" class="ei" id="e5-26" value="25000"></div>
+<div><input type="number" class="ei" id="e5-27" value="30000"></div>
+<div><input type="number" class="ei" id="e5-28" value="35000"></div>
+</div>
+
+<div class="pr i">
+<div>Travel</div>
+<div><input type="number" class="ei" id="e6-25" value="25000"></div>
+<div><input type="number" class="ei" id="e6-26" value="30000"></div>
+<div><input type="number" class="ei" id="e6-27" value="35000"></div>
+<div><input type="number" class="ei" id="e6-28" value="40000"></div>
+</div>
+
+<div class="pr i">
+<div>Events</div>
+<div><input type="number" class="ei" id="e7-25" value="20000"></div>
+<div><input type="number" class="ei" id="e7-26" value="25000"></div>
+<div><input type="number" class="ei" id="e7-27" value="30000"></div>
+<div><input type="number" class="ei" id="e7-28" value="35000"></div>
+</div>
+
+<div class="pr i">
+<div>Rent</div>
+<div><input type="number" class="ei" id="e8-25" value="15000"></div>
+<div><input type="number" class="ei" id="e8-26" value="18000"></div>
+<div><input type="number" class="ei" id="e8-27" value="20000"></div>
+<div><input type="number" class="ei" id="e8-28" value="22000"></div>
+</div>
+
+<div class="pr i">
+<div>Marketing</div>
+<div><input type="number" class="ei" id="e9-25" value="15000"></div>
+<div><input type="number" class="ei" id="e9-26" value="20000"></div>
+<div><input type="number" class="ei" id="e9-27" value="25000"></div>
+<div><input type="number" class="ei" id="e9-28" value="30000"></div>
+</div>
+
+<div class="pr i">
+<div>Software</div>
+<div><input type="number" class="ei" id="e10-25" value="5000"></div>
+<div><input type="number" class="ei" id="e10-26" value="7000"></div>
+<div><input type="number" class="ei" id="e10-27" value="10000"></div>
+<div><input type="number" class="ei" id="e10-28" value="12000"></div>
+</div>
+
+<div class="pr i">
+<div>Research</div>
+<div><input type="number" class="ei" id="e11-25" value="5000"></div>
+<div><input type="number" class="ei" id="e11-26" value="10000"></div>
+<div><input type="number" class="ei" id="e11-27" value="15000"></div>
+<div><input type="number" class="ei" id="e11-28" value="20000"></div>
+</div>
+
+<div class="pr i">
+<div>Legal</div>
+<div><input type="number" class="ei" id="e12-25" value="5000"></div>
+<div><input type="number" class="ei" id="e12-26" value="5000"></div>
+<div><input type="number" class="ei" id="e12-27" value="7000"></div>
+<div><input type="number" class="ei" id="e12-28" value="10000"></div>
+</div>
+
+<div class="pr i">
+<div>Accounting</div>
+<div><input type="number" class="ei" id="e13-25" value="5000"></div>
+<div><input type="number" class="ei" id="e13-26" value="7000"></div>
+<div><input type="number" class="ei" id="e13-27" value="10000"></div>
+<div><input type="number" class="ei" id="e13-28" value="12000"></div>
+</div>
+
+<div class="pr i">
+<div>Insurance</div>
+<div><input type="number" class="ei" id="e14-25" value="3000"></div>
+<div><input type="number" class="ei" id="e14-26" value="4000"></div>
+<div><input type="number" class="ei" id="e14-27" value="5000"></div>
+<div><input type="number" class="ei" id="e14-28" value="6000"></div>
+</div>
+
+<div class="pr i">
+<div>Website</div>
+<div><input type="number" class="ei" id="e15-25" value="1000"></div>
+<div><input type="number" class="ei" id="e15-26" value="2000"></div>
+<div><input type="number" class="ei" id="e15-27" value="3000"></div>
+<div><input type="number" class="ei" id="e15-28" value="4000"></div>
+</div>
+
+<div class="pr t">
+<div>Total Expenses</div>
+<div class="pa neg" id="te25">($0)</div>
+<div class="pa neg" id="te26">($0)</div>
+<div class="pa neg" id="te27">($0)</div>
+<div class="pa neg" id="te28">($0)</div>
+</div>
+
+<div class="pr gt">
+<div>NET INCOME</div>
+<div class="pa" id="ni25">$0</div>
+<div class="pa" id="ni26">$0</div>
+<div class="pa" id="ni27">$0</div>
+<div class="pa" id="ni28">$0</div>
+</div>
+
+</div>
+</div>
+
+</div>
+
+<script>
+// Stream configuration
+const streams = [
+  {i:1, n:'Foundation Grants', monthly:false},
+  {i:2, n:'Gov Grants', monthly:false},
+  {i:3, n:'Indiv Donors', monthly:false},
+  {i:4, n:'Major Gifts', monthly:false},
+  {i:5, n:'Corp Sponsors', monthly:false},
+  {i:6, n:'Retainer Clients', monthly:true},
+  {i:7, n:'Consulting', monthly:false},
+  {i:8, n:'Workshops', monthly:false},
+  {i:9, n:'Speaking', monthly:false},
+  {i:10, n:'Premium Subs', monthly:true},
+  {i:11, n:'Annual Members', monthly:false},
+  {i:12, n:'Indiv Founding', monthly:false},
+  {i:13, n:'Inst Founding', monthly:false},
+  {i:14, n:'Indiv Ongoing', monthly:false},
+  {i:15, n:'Inst Ongoing', monthly:false},
+  {i:16, n:'Events', monthly:false},
+  {i:17, n:'Content Sponsors', monthly:false},
+  {i:18, n:'Licensing', monthly:false},
+  {i:19, n:'Affiliate', monthly:true, noAmount:true}
+];
+
+const years = [25, 26, 27, 28];
+
+function updateCalculations() {
+  let revByYear = {25:{}, 26:{}, 27:{}, 28:{}};
+  let totals = {25:0, 26:0, 27:0, 28:0};
+  
+  // Calculate each stream
+  streams.forEach(stream => {
+    const checkbox = document.getElementById('c' + stream.i);
+    const block = document.getElementById('sb' + stream.i);
+    
+    if (checkbox && checkbox.checked) {
+      if (block) block.classList.add('active');
+      
+      years.forEach(yr => {
+        const count = parseFloat(document.getElementById('v' + stream.i + '-' + yr).value) || 0;
+        let total = 0;
+        
+        if (stream.noAmount) {
+          // Affiliate revenue - just multiply by 12
+          total = count * 12;
+        } else {
+          const amount = parseFloat(document.getElementById('a' + stream.i + '-' + yr).value) || 0;
+          total = count * amount;
+          if (stream.monthly) total *= 12;
+        }
+        
+        // Update the total display
+        const totalEl = document.getElementById('t' + stream.i + '-' + yr);
+        if (totalEl) {
+          totalEl.textContent = '$' + total.toLocaleString();
+        }
+        
+        if (total > 0) {
+          revByYear[yr][stream.n] = total;
+          totals[yr] += total;
+        }
+      });
+    } else {
+      if (block) block.classList.remove('active');
+      
+      // Clear totals when unchecked
+      years.forEach(yr => {
+        const totalEl = document.getElementById('t' + stream.i + '-' + yr);
+        if (totalEl) totalEl.textContent = '$0';
+      });
+    }
+  });
+  
+  // Update P&L revenue section
+  let html = '';
+  const allNames = new Set();
+  years.forEach(yr => Object.keys(revByYear[yr]).forEach(n => allNames.add(n)));
+  
+  allNames.forEach(name => {
+    html += '<div class="pr i"><div>' + name + '</div>';
+    years.forEach(yr => {
+      html += '<div class="pa">$' + (revByYear[yr][name] || 0).toLocaleString() + '</div>';
+    });
+    html += '</div>';
+  });
+  
+  document.getElementById('rl').innerHTML = html;
+  
+  // Update totals
+  years.forEach(yr => {
+    document.getElementById('tr' + yr).textContent = '$' + totals[yr].toLocaleString();
+    
+    // Calculate expenses
+    let expenses = 0;
+    for (let i = 1; i <= 15; i++) {
+      const expEl = document.getElementById('e' + i + '-' + yr);
+      expenses += expEl ? (parseFloat(expEl.value) || 0) : 0;
+    }
+    
+    document.getElementById('te' + yr).textContent = '($' + expenses.toLocaleString() + ')';
+    
+    // Calculate net income
+    const net = totals[yr] - expenses;
+    const netEl = document.getElementById('ni' + yr);
+    netEl.textContent = '$' + net.toLocaleString();
+    netEl.className = 'pa ' + (net >= 0 ? 'pos' : 'neg');
+  });
+}
+
+// Add event listeners
+document.querySelectorAll('input').forEach(el => {
+  el.addEventListener('change', updateCalculations);
+  el.addEventListener('input', updateCalculations);
+});
+
+// Initial calculation
+updateCalculations();
+</script>
+
+</body></html>
