@@ -25,9 +25,11 @@ h1{margin-bottom:10px}
 .pr.sh{font-weight:bold;margin-top:12px;text-transform:uppercase}
 .pr.i{padding-left:12px}
 .pr.t{font-weight:bold;border-top:1px solid #ccc;padding-top:8px;margin-top:8px}
-.pr.t .pa{width:75px;text-align:center;margin:0 auto}
+.pr.t > div:not(:first-child){display:flex;justify-content:center}
+.pr.t .pa{width:75px;text-align:center}
 .pr.gt{font-weight:bold;border-top:3px double #000;padding-top:10px;margin-top:10px}
-.pr.gt .pa{width:75px;text-align:center;margin:0 auto}
+.pr.gt > div:not(:first-child){display:flex;justify-content:center}
+.pr.gt .pa{width:75px;text-align:center}
 .pa{text-align:right;font-family:monospace}
 .pos{color:#059669}
 .neg{color:#dc2626}
@@ -635,10 +637,10 @@ h1{margin-bottom:10px}
 
 <div class="pr t">
 <div>Total Revenue</div>
-<div class="pa" id="tr25">$0</div>
-<div class="pa" id="tr26">$0</div>
-<div class="pa" id="tr27">$0</div>
-<div class="pa" id="tr28">$0</div>
+<div><div class="pa" id="tr25">$0</div></div>
+<div><div class="pa" id="tr26">$0</div></div>
+<div><div class="pa" id="tr27">$0</div></div>
+<div><div class="pa" id="tr28">$0</div></div>
 </div>
 
 <div class="pr sh">
@@ -771,18 +773,18 @@ h1{margin-bottom:10px}
 
 <div class="pr t">
 <div>Total Expenses</div>
-<div class="pa neg" id="te25">($0)</div>
-<div class="pa neg" id="te26">($0)</div>
-<div class="pa neg" id="te27">($0)</div>
-<div class="pa neg" id="te28">($0)</div>
+<div><div class="pa neg" id="te25">($0)</div></div>
+<div><div class="pa neg" id="te26">($0)</div></div>
+<div><div class="pa neg" id="te27">($0)</div></div>
+<div><div class="pa neg" id="te28">($0)</div></div>
 </div>
 
 <div class="pr gt">
 <div>NET INCOME</div>
-<div class="pa" id="ni25">$0</div>
-<div class="pa" id="ni26">$0</div>
-<div class="pa" id="ni27">$0</div>
-<div class="pa" id="ni28">$0</div>
+<div><div class="pa" id="ni25">$0</div></div>
+<div><div class="pa" id="ni26">$0</div></div>
+<div><div class="pa" id="ni27">$0</div></div>
+<div><div class="pa" id="ni28">$0</div></div>
 </div>
 
 </div>
